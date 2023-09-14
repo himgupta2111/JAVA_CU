@@ -1,0 +1,30 @@
+import java.util.Scanner;
+import java.lang.Thread;
+
+class ReverseGreet extends Thread {
+  int currThreadIndex;
+  
+  ReverseGreet(int currThreadIndex) {
+    this.currThreadIndex = currThreadIndex;
+  }
+    
+  @Override
+  public void run() {
+    System.out.println("CodeQuotient Thread" + currThreadIndex);
+    if (currThreadIndex > 1) {
+      ReverseGreet t = new ReverseGreet(currThreadIndex - 1);
+      t.start();
+    }
+  }
+}
+
+public class Main {
+ public static void main(String[] args) {
+ 	Scanner sc = new Scanner(System.in);
+    int n = sc.nextInt();
+    if (n > 0) {
+      ReverseGreet t1 = new ReverseGreet(n);
+      t1.start();
+    }
+  }
+}
